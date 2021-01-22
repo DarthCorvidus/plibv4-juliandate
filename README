@@ -1,0 +1,10 @@
+plibv4/JulianDate
+
+JulianDate uses Julian Days for date calculations instead of UNIX Epoch and is
+well suited and geared towards pure date calculations, such as to iterate over
+every day of a year, or getting the date of 36 months in the future.
+
+Some may object that it is somewhat redundant in the light of PHPs own DateTime
+class, but I wrote the first installment long before PHP's DateTime came into
+life and I still find it to be quite useful when doing calculations for which
+days as a resolution are sufficient.
