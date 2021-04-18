@@ -104,6 +104,11 @@ final class JulianDateTest  extends TestCase {
 		$date = JulianDate::fromString("2020-06-12");
 		$this->assertEquals("5", $date->getFormat("N"));
 	}
+
+	public function testToIsodate() {
+		$date = new JulianDate(2020, 4, 18);
+		$this->assertEquals("2020-04-18", $date->getIsodate());
+	}
 	
 	public function testGetFirstDay() {
 		$date = JulianDate::fromString("2020-06-12");
