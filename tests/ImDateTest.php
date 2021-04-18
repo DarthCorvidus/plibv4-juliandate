@@ -14,6 +14,16 @@ use PHPUnit\Framework\TestCase;
  */
 
 final class JulianDateTest  extends TestCase {
+	public function testfromNumeric() {
+		$date = JulianDate::fromNumeric(2451545);
+		$this->assertEquals("2000-01-01", $date->getFormat("Y-m-d"));
+	}
+
+	public function testToNumeric() {
+		$date = new JulianDate(2000, 1, 1);
+		$this->assertEquals(2451545, $date->toNumeric());
+	}
+	
 	public function testFromStringSane() {
 		$this->assertInstanceOf(JulianDate::class,	JulianDate::fromString("2020-06-12"));
 	}

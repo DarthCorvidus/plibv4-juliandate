@@ -87,6 +87,16 @@ class JulianDate {
 	}
 	
 	/**
+	 * To Numeric
+	 * 
+	 * Return julian days as integer.
+	 * @return int
+	 */
+	function toNumeric(): int {
+		return $this->numeric;
+	}
+	
+	/**
 	 * 
 	 * @param int $unit
 	 * @throws InvalidArgumentException
