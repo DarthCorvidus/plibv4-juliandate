@@ -1,13 +1,16 @@
 <?php
 /**
+ * @copyright (c) 2021, Claus-Christoph Küthe
+ * @author Claus-Christoph Küthe <plibv4@vm01.telton.de>
+ * @license LGPLv2.1
+ */
+
+/**
  * Julian Date class
  * 
  * JulianDate is pure date only, using julian days. JulianDate is immutable, ie.
  * no function changes the internal state of an JulianDate instance, but returns
  * a new instance of JulianDate instead.
- *
- * @author Claus-Christoph Küthe
- * @copyright (c) 2020, Claus-Christoph Küthe
  */
 class JulianDate {
 	const DAY = 1;
@@ -75,24 +78,26 @@ class JulianDate {
 	}
 	
 	/**
+	 * From Int
+	 * 
 	 * Constructs instance of JulianDate directly from julian days.
 	 * 
-	 * @param int $julian
+	 * @param int $julian Julian Days
 	 * @return JulianDate
 	 */
-	static function fromNumeric(int $julian): JulianDate {
+	static function fromInt(int $julian): JulianDate {
 		$date = new JulianDate();
 		$date->numeric = $julian;
 	return $date;
 	}
 	
 	/**
-	 * To Numeric
+	 * To Int
 	 * 
 	 * Return julian days as integer.
 	 * @return int
 	 */
-	function toNumeric(): int {
+	function toInt(): int {
 		return $this->numeric;
 	}
 	
@@ -118,7 +123,7 @@ class JulianDate {
 		}
 		if($unit==self::WEEK) {
 			$days = $this->numeric-($this->getFormat("N")-1);
-		return JulianDate::fromNumeric($days);
+		return JulianDate::fromInt($days);
 		}
 
 		if($unit==self::MONTH) {
@@ -143,7 +148,7 @@ class JulianDate {
 		}
 		if($unit==self::WEEK) {
 			$days = $this->numeric+(7-$this->getFormat("N"));
-		return JulianDate::fromNumeric($days);
+		return JulianDate::fromInt($days);
 		}
 
 		if($unit==self::MONTH) {
@@ -179,7 +184,7 @@ class JulianDate {
 		}
 		$this->allowedUnit($unit);
 		if($unit==self::WEEK) {
-			return JulianDate::fromNumeric($this->numeric+($amount*7));
+			return JulianDate::fromInt($this->numeric+($amount*7));
 		}
 		if($unit==self::MONTH) {
 			return $this->addMonths($amount);
@@ -187,7 +192,7 @@ class JulianDate {
 		if($unit==self::YEAR) {
 			return new JulianDate($this->getFormat("Y")+$amount, $this->getFormat("n"), $this->getFormat("j"));
 		}
-	return JulianDate::fromNumeric($this->numeric+$amount);
+	return JulianDate::fromInt($this->numeric+$amount);
 	}
 	/**
 	 * 
