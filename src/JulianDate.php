@@ -217,4 +217,14 @@ class JulianDate {
 		$array = cal_from_jd($this->numeric, CAL_GREGORIAN);
 	return sprintf("%d-%02d-%02d", $array["year"], $array["month"], $array["day"]);
 	}
+	
+	/**
+	 * Get Isodate
+	 * 
+	 * Returns date as isodate. Basically the same as __toString()
+	 * @return string 
+	 */
+	function getIsodate(): string {
+		return $this->__toString();
+	}
 }
