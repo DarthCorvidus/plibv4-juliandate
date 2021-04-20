@@ -317,66 +317,151 @@ final class JulianDateTest  extends TestCase {
 		}
 	}
 
+	/**
+	 * Test add Days
+	 * 
+	 * Test to add five days to a Julian date.
+	 */
 	public function testAddDays() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2020-06-17", $date->addUnit(5, JulianDate::DAY));
 	}
 	
+	/**
+	 * Test add weeks
+	 * 
+	 * Test to add two weeks to a Julian date
+	 */
 	public function testAddWeeks() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2020-06-26", $date->addUnit(2, JulianDate::WEEK));
 	}
 
+	/**
+	 * Test add months
+	 * 
+	 * Test to add three months to a Julian date
+	 */
 	public function testAddMonths() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2020-09-12", $date->addUnit(3, JulianDate::MONTH));
 	}
 	
+	/**
+	 * Test add many months
+	 * 
+	 * Test to add a large amount of months (38) to a Julian date
+	 */
 	public function testAddManyMonths() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2023-08-12", $date->addUnit(38, JulianDate::MONTH));
 	}
 	
-	public function testAddMonthsRange() {
+	/**
+	 * Test add months Range Exception
+	 * 
+	 * addUnit is supposed to throw an exception if the result of an addition is
+	 * out of range, ie 2020-05-31 +1 Month cannot be satisfied as 2020-06-31 is
+	 * out of range.
+	 */
+	public function testAddMonthsRangeException() {
 		$date = new JulianDate(2020, 5, 31);
 		$this->expectException(RangeException::class);
 		$date->addUnit(1, JulianDate::MONTH);
 	}
 
-	
+	/**
+	 * Test add years
+	 * 
+	 * Test to add seven years to a Julian date.
+	 */
 	public function testAddYears() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2027-06-12", $date->addUnit(7, JulianDate::YEAR));
 	}
 	
-	public function testAddYearsRange() {
+	/**
+	 * Test add years Range Exception
+	 * 
+	 * Throws an exception if addition of years results in an invalid date (only
+	 * possible for leap years)
+	 */
+	public function testAddYearsRangeException() {
 		$date = new JulianDate(2020, 2, 29);
 		$this->expectException(RangeException::class);
 		$date->addUnit(1, JulianDate::YEAR);
 	}
-	
+
+	/**
+	 * Test sub days
+	 * 
+	 * Subtracting days from a Julian date
+	 */
 	public function testSubDays() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2020-06-07", $date->addUnit(-5, JulianDate::DAY));
 	}
-	
+
+	/**
+	 * Test sub weeks
+	 * 
+	 * Subtracting weeks from a Julian date
+	 */
 	public function testSubWeeks() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2020-05-29", $date->addUnit(-2, JulianDate::WEEK));
 	}
-	
+
+	/**
+	 * Test sub months
+	 * 
+	 * Subtracting months from a Julian date
+	 */
 	public function testSubMonths() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2020-03-12", $date->addUnit(-3, JulianDate::MONTH));
 	}
 
+	/**
+	 * Test sub many months
+	 * 
+	 * Subtracting a larger amount of months from a Julian date
+	 */
 	public function testSubManyMonths() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2017-04-12", $date->addUnit(-38, JulianDate::MONTH));
 	}
 
+	/**
+	 * Test sub years
+	 * 
+	 * Subtract years from Julian date
+	 */
 	public function testSubYears() {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2017-06-12", $date->addUnit(-3, JulianDate::YEAR));
 	}
+
+	/*
+	 * Test sub month Range Exception
+	 * 
+	 * Expect RangeException if day is out of range after subtracting one month.
+	 */
+	public function testSubMonthRangeException() {
+		$date = new JulianDate(2020, 5, 31);
+		$this->expectException(RangeException::class);
+		$date->addUnit(-1, JulianDate::MONTH);
+	}
+	
+	/**
+	 * Test sub year Range Exception
+	 * 
+	 * Expect RangeException if day is out of range after subtracting one year.
+	 */
+	public function testSubYearsRangeException() {
+		$date = new JulianDate(2020, 2, 29);
+		$this->expectException(RangeException::class);
+		$date->addUnit(-1, JulianDate::YEAR);
+	}
+
 }
