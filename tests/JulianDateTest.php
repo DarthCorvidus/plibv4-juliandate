@@ -338,6 +338,30 @@ final class JulianDateTest  extends TestCase {
 	}
 
 	/**
+	 * test add month
+	 * 
+	 * Adds a month for 10 years, one month at a time.
+	 */
+
+	public function testAddMonth() {
+		$year = 2010;
+		$month = 1;
+		$date = new JulianDate(2010, 1, 1);
+		for($i=0;$i<=120;$i++) {
+			$expect = sprintf("%04d-%02d-%02d", $year, $month, 1);
+			$this->assertEquals($expect, $date->__toString());
+			$date = $date->addUnit(1, JulianDate::MONTH);
+			if($month==12) {
+				$year++;
+				$month = 1;
+				continue;
+			}
+			$month++;
+		}
+	}
+
+	
+	/**
 	 * Test add months
 	 * 
 	 * Test to add three months to a Julian date
@@ -411,6 +435,29 @@ final class JulianDateTest  extends TestCase {
 		$date = new JulianDate(2020, 6, 12);
 		$this->assertEquals("2020-05-29", $date->addUnit(-2, JulianDate::WEEK));
 	}
+	
+	/**
+	 * test sub month
+	 * 
+	 * Subtracts a month for 10 years, one month at a time.
+	 */
+	public function testSubMonth() {
+		$year = 2020;
+		$month = 1;
+		$date = new JulianDate(2020, 1, 1);
+		for($i=120;$i>=0;$i--) {
+			$expect = sprintf("%04d-%02d-%02d", $year, $month, 1);
+			$this->assertEquals($expect, $date->__toString());
+			$date = $date->addUnit(-1, JulianDate::MONTH);
+			if($month==1) {
+				$year--;
+				$month = 12;
+				continue;
+			}
+			$month--;
+		}
+	}
+
 
 	/**
 	 * Test sub months

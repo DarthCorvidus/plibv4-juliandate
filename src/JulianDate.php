@@ -206,6 +206,15 @@ class JulianDate {
 			$years = ceil($amount/12)+$this->getFormat("Y");
 		}
 		$months = ($amount%12)+$this->getFormat("n");
+		
+		if($months>12) {
+			$months = $months-12;
+			$years = $years+1;
+		}
+		if($months<1) {
+			$months = $months+12;
+			$years = $years-1;
+		}
 	return new JulianDate($years, $months, $this->getFormat("j"));
 	}
 	
